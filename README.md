@@ -19,6 +19,10 @@ some cmd line stuff ive used here (a little different than the linux stuff ive u
 - tailwind-test
   - npx create-next-app -e with-tailwindcss name
   - cd name .........
+  - stuff from command line::
+    - yarn dev (start dev server)
+    - yarn build (build app for production)
+    - yarn start (run in production mode)
 
 other stuff i can try to practice later:
 - linux/xubuntu stuff (cd ls general os and cmd line stuff)
