@@ -23,6 +23,11 @@ some cmd line stuff ive used here (a little different than the linux stuff ive u
     - yarn dev (start dev server)
     - yarn build (build app for production)
     - yarn start (run in production mode)
+- backend stuff -> make sure file is main.go
+  - downloaded golang
+  - go mod init example.com/web-service-gin
+  - go get .
+  - go run .
 
 other stuff i can try to practice later:
 - linux/xubuntu stuff (cd ls general os and cmd line stuff)
