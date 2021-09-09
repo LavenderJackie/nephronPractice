@@ -3,6 +3,7 @@ package main
 import (
   "net/http"
   "github.com/gin-gonic/gin"
+  "strings"
 )
 
 type response struct {
@@ -30,7 +31,7 @@ var npcs = []npc {
 func postNPC(c *gin.Context) {
   var newNPC npc
 
-  if err := c.BindJSON(&newAlbum); err != nil {
+  if err := c.BindJSON(&newNPC); err != nil {
     return
   }
 
@@ -43,12 +44,30 @@ func getNPCs(c *gin.Context) {
 }
 
 func getNPCByName(c *gin.Context) {
-  name := c.Param("name")
+  name := strings.ToLower(c.Param("name"))
 
   for _, a := range npcs {
-    if a.Name == name {
+    if strings.ToLower(a.Name) == name {
       c.IndentedJSON(http.StatusOK, a)
       return
+    }
+  }
+  c.IndentedJSON(http.StatusNotFound, gin.H{"message": "npc not found"})
+}
+
+func getResponseByNameID(c *gin.Context) {
+  name := strings.ToLower(c.Param("name"))
+  id := c.Param("id")
+
+  for _, a := range npcs {
+    if strings.ToLower(a.Name) == name {
+      for _, b := range a.Responses {
+        if b.ID == id {
+          c.IndentedJSON(http.StatusOK, b)
+          return
+        }
+      }
+      c.IndentedJSON(http.StatusNotFound, gin.H{"message": "npc missing requested response"})
     }
   }
   c.IndentedJSON(http.StatusNotFound, gin.H{"message": "npc not found"})
@@ -58,6 +77,7 @@ func main() {
   router := gin.Default()
   router.GET("/npcs", getNPCs)
   router.GET("/npcs/:name", getNPCByName)
+  router.GET("/npcs/:name/:id", getResponseByNameID)
   router.POST("/npcs", postNPC)
 
   router.Run("localhost:8080")
