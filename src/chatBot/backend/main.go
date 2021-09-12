@@ -3,7 +3,9 @@ package main
 import (
   "net/http"
   "github.com/gin-gonic/gin"
+  "github.com/gin-contrib/cors"
   "strings"
+  "time"
 )
 
 type response struct {
@@ -75,6 +77,18 @@ func getResponseByNameID(c *gin.Context) {
 
 func main() {
   router := gin.Default()
+  router.Use(cors.New(cors.Config{
+    AllowOrigins:     []string{"http://localhost:2815"},
+    AllowMethods:     []string{"POST", "GET"},
+    AllowHeaders:     []string{"Origin"},
+    ExposeHeaders:    []string{"Content-Length"},
+    AllowCredentials: true,
+    AllowOriginFunc:  func(origin string) bool {
+      return origin == "https://github.com"
+    },
+    MaxAge: 12 * time.Hour,
+  }))
+
   router.GET("/npcs", getNPCs)
   router.GET("/npcs/:name", getNPCByName)
   router.GET("/npcs/:name/:id", getResponseByNameID)
