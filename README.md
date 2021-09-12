@@ -32,3 +32,6 @@ some cmd line stuff ive used here (a little different than the linux stuff ive u
 other stuff i can try to practice later:
 - linux/xubuntu stuff (cd ls general os and cmd line stuff)
 - VIM VIM VIM VIM VIM
+- tmux
+- babylon js
+- orms (GORM ???)
