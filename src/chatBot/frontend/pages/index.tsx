@@ -8,12 +8,14 @@ import {useState, useEffect, useRef} from 'react'
 
 const Home: NextPage = () => {
   const [npcs, setNPCS] = useState(null)
+  const [messages, setMessages] = useState([])
+  const [typed, setTyped] = useState(null)
 
   useEffect(() => {
-    axios.get("http://localhost:8080/npcs").then((res) => {
+    axios.get("http://localhost:8080/npcs/tavern keep").then((res) => {
       setNPCS(res.data)
     })
-  },[])
+  }, [messages])
 
   return (
     <div className={styles.container}>
@@ -26,10 +28,17 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={`block rounded-xl flex flex-col mx-16 bg-green-600`}>
           <div className={`block rounded-xl m-4 w-80 h-8 p-2 bg-green-100 ${styles.outputLog}`}>
-            {npcs[0].name}
+            {messages.map(e => {return <p className="text-black font-bold"> {e} </p>})}
           </div>
-          <input className="block rounded-xl m-4 mt-0 w-80 h-8 p-2 bg-white border border-border transparent focus:outline-none" placeholder="..." />
-          <button className="block rounded-xl m-4 mt-0 w-80 p-2 bg-green-300 hover:bg-green-400 text-center font-extrabold"> submit </button>
+          <input className="block rounded-xl m-4 mt-0 w-80 h-8 p-2 bg-white border border-border transparent focus:outline-none"
+                  placeholder="type here to chat"
+                  value={typed}
+                  onChange={(e) => {setTyped(e.target.value)}}/>
+          <button className="block rounded-xl m-4 mt-0 w-80 p-2 bg-green-300 hover:bg-green-400 text-center font-extrabold"
+                  onClick={() => {
+                    messages.push(typed)
+                    setTyped(null)
+                  }}> submit </button>
         </div>
       </main>
     </div>
