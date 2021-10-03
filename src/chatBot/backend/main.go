@@ -19,16 +19,20 @@ type npc struct {
 }
 
 var npcs = []npc {
-  {Name: "Tavern Keep", Responses: []response{
-    {ID: "0", Prompt: "", Phrase: "im sorry i dont understand, could you rephrase??"},
-    {ID: "1", Prompt: "bathroom", Phrase: "oh its down the hall to the right of the kitchen"},
-    {ID: "2", Prompt: "eat", Phrase: "we dont have a whole lot to eat but we have a damn good grilled cheese"},
-    {ID: "3", Prompt: "drink", Phrase: "we have some local mead left over from the harvest"},
-    {ID: "4", Prompt: "hello", Phrase: "welcome to my tavern come sit at the bar"},
-    }},
-  {Name: "Drunk Man", Responses: []response{
-    {ID: "0", Prompt: "", Phrase: "fuck off unless youre bringing another round"},
-    }},
+  {Name: "Tavern Keep",
+    Responses: []response{
+      {ID: "0", Prompt: "", Phrase: "im sorry i dont understand, could you rephrase??"},
+      {ID: "1", Prompt: "bathroom", Phrase: "oh its down the hall to the right of the kitchen"},
+      {ID: "2", Prompt: "eat", Phrase: "we dont have a whole lot to eat but we have a damn good grilled cheese"},
+      {ID: "3", Prompt: "drink", Phrase: "we have some local mead left over from the harvest"},
+      {ID: "4", Prompt: "hello", Phrase: "welcome to my tavern come sit at the bar"},
+    }
+  },
+  {Name: "Drunk Man",
+    Responses: []response{
+      {ID: "0", Prompt: "", Phrase: "fuck off unless youre bringing another round"},
+    }
+  },
 }
 
 func postNPC(c *gin.Context) {
